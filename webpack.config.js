@@ -1,9 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-	mode: process.env.NODE_ENV,
 	module: {
 		rules: [
 			{
@@ -23,7 +22,6 @@ module.exports = {
 				],
 				use: [
 					MiniCssExtractPlugin.loader,
-					// { loader: "style-loader" },
 					{ loader: "css-loader" },
 				]
 			},
@@ -49,21 +47,19 @@ module.exports = {
 		}
 	},
 	devServer: {
-		proxy: {
-			'/api': 'http://localhost:3000'
-		},
-		contentBase: path.join(__dirname, 'public'),
 		compress: true,
-		historyApiFallback: true,
-		hot: false,
-		https: false,
-		noInfo: true,
+		contentBase: path.join(__dirname, 'public'),
+		watchContentBase: true,
+		hot: true,
+		port: 9000,
+		index: 'index.html',
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+			template: path.join(__dirname, './src/index.html'),
 			title: 'ES-6 boilerplate',
 			filename: 'index.html'
 		}),
-		new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin(),
 	]
 }

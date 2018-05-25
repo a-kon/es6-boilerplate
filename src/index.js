@@ -1,3 +1,4 @@
 import css from 'src/main.css';
 
-console.log("START");
+import number from 'src/test.js';
+console.log(number);
